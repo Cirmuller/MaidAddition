@@ -35,4 +35,4 @@ This is an addon for Touhou Little Maid. We add 3 features for the maids:
 1. After this mod is added to game, the table of tasks will contain a task of using handcranks, as the above picture showed.
 2. After this mod is added to game, the avatar frame will contain a button of barriar. One can set whether to load the chunks nearby by clicking the button, as picture showed.
 ### Notices
-As a lack of making mods, this mod may contain a large number of bugs. Please be careful when using this mod.
+As a lack of experience for making mods, this mod may contain a large number of bugs. Please be careful when using this mod.
