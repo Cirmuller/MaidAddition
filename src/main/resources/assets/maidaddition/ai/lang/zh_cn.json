@@ -1,0 +1,179 @@
+[
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*不\\S{1,2}休息\\S*": -1.0,
+      "\\S*休息\\S*": 0.9,
+      "\\S*停止\\S*": 1.0,
+      "\\S*别休息\\S*": -1.0,
+      "\\S*放松\\S*": 1.0,
+      "\\S*闲散\\S*": 1.0
+    },
+    "task": "idle"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*攻击\\S*": 0.6,
+      "\\S*进攻\\S*": 0.8
+    },
+    "task": "attack"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*弓\\S*": 1.0,
+      "\\S*攻击\\S*": 0.8,
+      "\\S*进攻\\S*": 0.8
+    },
+    "task": "ranged_attack"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*弩\\S*": 1.0,
+      "\\S*攻击\\S*": 0.8,
+      "\\S*进攻\\S*": 0.8
+    },
+    "task": "crossbow_attack"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*弹幕\\S*": 1.0,
+      "\\S*攻击\\S*": 0.8,
+      "\\S*进攻\\S*": 0.8
+    },
+    "task": "danmaku_attack"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*三叉戟\\S*": 1.0,
+      "\\S*攻击\\S*": 0.8,
+      "\\S*进攻\\S*": 0.8,
+      "粪叉": 0.6
+    },
+    "task": "trident_attack"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*下地\\S*干活\\S*": 0.8,
+      "\\S*农活\\S*": 0.8,
+      "\\S*种\\S*": 0.2,
+      "\\S*种地\\S*": 0.8
+    },
+    "task": "farm"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*甘蔗\\S*": 1.0
+    },
+    "task": "sugar_cane"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*南瓜\\S*": 0.9,
+      "\\S*瓜\\S*": 0.1,
+      "\\S*西瓜\\S*": 0.9
+    },
+    "task": "melon"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*可可\\*": 0.9
+    },
+    "task": "cocoa"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*蜂蜜\\S*": 0.9,
+      "\\S*蜜\\S*": 0.1
+    },
+    "task": "honey"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*拔草\\S*": 0.9,
+      "\\S*除草\\S*": 0.9
+    },
+    "task": "grass"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*铲雪\\S*": 0.9,
+      "\\S*除雪\\S*": 0.6
+    },
+    "task": "snow"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*(关心|喂)(主人|我)\\S*": 0.9,
+      "\\S*东西\\S*吃\\S*": 0.5,
+      "\\S*投喂\\S*": 0.3
+    },
+    "task": "feed"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*奶\\S*": 0.6,
+      "\\S*牛奶\\S*": 0.9
+    },
+    "task": "milk"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*火把\\S*": 0.7,
+      "\\S*照明\\S*": 0.8
+    },
+    "task": "torch"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*喂\\S*动物\\S*": 0.9,
+      "\\S*繁殖动物\\S*": 1.0
+    },
+    "task": "feed_animal"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*钓鱼\\S*": 1.0
+    },
+    "task": "fishing"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*灭火\\S*": 1.0
+    },
+    "task": "extinguishing"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*下\\S*棋\\S*": 0.9,
+      "\\S*游戏\\S*": 0.6
+    },
+    "task": "board_games"
+  },
+  {
+    "language": "zh_cn",
+    "matchString": {
+      "\\S*打工\\S*": 0.4,
+      "\\S*摇(手摇曲柄|曲柄|扳手)\\S*": 0.8
+    },
+    "task": "hand_crank_task"
+  }
+]

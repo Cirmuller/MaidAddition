@@ -1,0 +1,101 @@
+package com.cirmuller.maidaddition.mixin;
+
+import com.cirmuller.maidaddition.MaidAddition;
+import com.cirmuller.maidaddition.entity.memory.MemoryRegistry;
+import com.cirmuller.maidaddition.network.MaidChunkLoadingMessage;
+import com.cirmuller.maidaddition.network.NetWorkHandler;
+import com.github.tartaricacid.touhoulittlemaid.client.gui.entity.maid.AbstractMaidContainerGui;
+import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
+import com.github.tartaricacid.touhoulittlemaid.inventory.container.AbstractMaidContainer;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
+import org.apache.logging.log4j.LogManager;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.github.tartaricacid.touhoulittlemaid.util.GuiTools.NO_ACTION;
+
+@Mixin(AbstractMaidContainerGui.class)
+public abstract class AbstractMaidContainerGuiMixin<T extends AbstractMaidContainer> extends AbstractContainerScreen<T> {
+    @Unique private ImageButton chunkLoadedButton;
+    @Unique private static ResourceLocation chunkLoadedButtonResource=new ResourceLocation(MaidAddition.MODID,"textures/gui/maid_gui_button.png");
+
+    @Final
+    @Shadow(remap = false) protected EntityMaid maid;
+    public AbstractMaidContainerGuiMixin(T p_97741_, Inventory p_97742_, Component p_97743_) {
+        super(p_97741_,p_97742_,p_97743_);
+        LogManager.getLogger(MaidAddition.MODID).error("Error calling constructor");
+    }
+
+    @Inject(method = "addStateButton",at = @At("TAIL"),remap = false)
+    public void addStateButtonMixin(CallbackInfo ci){
+        chunkLoadedButton=new ImageButton(leftPos + 8, topPos + 26, 9, 9, 0, 0, 10, chunkLoadedButtonResource,
+                (button)->{
+                    boolean isChunkLoaded=maid.getBrain().getMemory(MemoryRegistry.CAN_CHUNK_LOADED.get()).isPresent();
+                    if(isChunkLoaded){
+                        isChunkLoaded=maid.getBrain().getMemory(MemoryRegistry.CAN_CHUNK_LOADED.get()).get();
+                    }
+
+                    if(!isChunkLoaded){
+                        isChunkLoaded=true;
+                        /*
+                        Memory数据不会在客户端与服务端自动同步，所以我们要手动发包
+                         */
+                        NetWorkHandler.CHANNEL.sendToServer(new MaidChunkLoadingMessage(maid.getId(),isChunkLoaded));
+                        maid.getBrain().setMemory(MemoryRegistry.CAN_CHUNK_LOADED.get(),isChunkLoaded);
+                    }
+                    else{
+                        isChunkLoaded=false;
+                        /*
+                        Memory数据不会在客户端与服务端自动同步，所以我们要手动发包
+                         */
+                        NetWorkHandler.CHANNEL.sendToServer(new MaidChunkLoadingMessage(maid.getId(),isChunkLoaded));
+                        maid.getBrain().setMemory(MemoryRegistry.CAN_CHUNK_LOADED.get(),isChunkLoaded);
+                    }
+                });
+        this.addRenderableWidget(chunkLoadedButton);
+    }
+
+    @Inject(method = "render",at=@At("TAIL"),remap = true)
+    public void renderMixin(GuiGraphics graphics,int mouseX,int mouseY,float partialTicks,CallbackInfo ci){
+        if(chunkLoadedButton.isHovered()){
+            MutableComponent context;
+            boolean isChunkLoaded=maid.getBrain().getMemory(MemoryRegistry.CAN_CHUNK_LOADED.get()).isPresent();
+            if(isChunkLoaded){
+                isChunkLoaded=maid.getBrain().getMemory(MemoryRegistry.CAN_CHUNK_LOADED.get()).get();
+            }
+
+            if(isChunkLoaded) {
+                context=Component.literal("")
+                        .append(Component.translatable("tooltips." + MaidAddition.MODID + ".info.chunk_loading.true"));
+            }
+            else {
+                context=Component.literal("")
+                        .append(Component.translatable("tooltips." + MaidAddition.MODID + ".info.chunk_loading.false"));
+            }
+
+            graphics.renderComponentTooltip(this.font, List.of(context),mouseX,mouseY);
+        }
+
+
+    }
+
+    @Shadow
+    protected abstract void renderBg(GuiGraphics guiGraphics, float v, int i, int i1);
+
+
+}

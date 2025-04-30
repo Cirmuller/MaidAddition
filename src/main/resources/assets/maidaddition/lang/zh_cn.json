@@ -1,0 +1,12 @@
+{
+  "task.maidaddition.chunk_loading_task": "加载区块",
+  "task.maidaddition.hand_crank_task": "手摇曲柄",
+  "task.maidaddition.chunk_loading_task.desc": "女仆能加载附近一定范围内的区块",
+  "task.maidaddition.hand_crank_task.desc": "女仆能主动摇机械动力的手摇曲柄",
+  "tooltips.maidaddition.info.chunk_loading.true": "加载区块:启用",
+  "tooltips.maidaddition.info.chunk_loading.false":"加载区块:禁用",
+  "message.maidaddition.whether_chunks_being_loading": "区块是否正在加载: %d"
+
+
+
+}

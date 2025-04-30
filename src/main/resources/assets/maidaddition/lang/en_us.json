@@ -1,0 +1,8 @@
+{
+  "task.maidaddition.chunk_loading_task": "Loading Chunk",
+  "task.maidaddition.hand_crank_task": "Use handcrank",
+  "task.maidaddition.chunk_loading_task.desc": "Maid can load the chunks nearby",
+  "task.maidaddition.hand_crank_task.desc": "Maid can use the handcrank in mod Create",
+  "tooltips.maidaddition.info.chunk_loading.true": "Loading chunks: enable",
+  "tooltips.maidaddition.info.chunk_loading.false":"Loading chunks: disable"
+}
