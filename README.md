@@ -21,7 +21,7 @@
 由于本人模组制作经验欠缺，此模组或仍有大量bug，还请小心使用。
 
 ### Introduction
-This is an affiliate mod for Touhou Little Maid. We add 3 features for the maids:
+This is an addon for Touhou Little Maid. We add 3 features for the maids:
 
 1. Maids can load the chunks nearby. On the chunks loaded by maids, entities, random ticks etc. would be computed.
 2. Maids can use the handcranks in Create.
