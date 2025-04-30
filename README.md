@@ -25,7 +25,7 @@ This is an addon for Touhou Little Maid. We add 3 features for the maids:
 
 1. Maids can load the chunks nearby. On the chunks loaded by maids, entities, random ticks etc. would be computed.
 2. Maids can use the handcranks in Create.
-3. A simple Chinese speech recognization based on matching of regular expressions is added so that when user's say something to maids, maids may switch the tasks they are currently doing.
+3. A simple Chinese speech recognization based on matching the regular expressions is added so that when users say something to maids, maids may switch the tasks they are currently doing.
 ### Credits
 
 1. Touhou Little Maid: TartaricAcid et al.
