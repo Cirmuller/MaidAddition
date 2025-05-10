@@ -33,7 +33,7 @@ public class CalculateTaskThread extends Thread{
     private EntityMaid maid;
     private String message;
     private static Logger logger= LogManager.getLogger(MaidAddition.MODID);
-    private static String AISite= String.format(".\\config\\%s\\ai.json",MaidAddition.MODID);
+    private static String AISite= String.format(".%sconfig%s%s%sai.json",File.separator,File.separator,MaidAddition.MODID,File.separator);
     private static List<TaskKey> listOfTask=new ArrayList<>();
     public static void init(){
         File file=new File(AISite);
