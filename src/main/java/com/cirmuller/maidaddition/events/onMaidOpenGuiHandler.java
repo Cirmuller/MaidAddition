@@ -68,7 +68,17 @@ public class onMaidOpenGuiHandler {
         int mouseY=event.getMouseY();
 
         Class abstractMaidContainerGuiClass= Screen.class;
-        Field fontField=abstractMaidContainerGuiClass.getDeclaredField("font");
+        Field[] fields=abstractMaidContainerGuiClass.getDeclaredFields();
+        Field fontField=null;
+        for(int i=0;i<fields.length;i++){
+            Field field=fields[i];
+            field.setAccessible(true);
+            if(field.getType().equals(Font.class)){
+                fontField=field;
+                break;
+            }
+        }
+        assert fontField!=null;
         fontField.setAccessible(true);
         Font font=(Font)fontField.get(event.getGui());
 
