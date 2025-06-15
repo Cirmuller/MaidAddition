@@ -29,6 +29,11 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 
+/**
+ * 因酒石酸菌大佬以及实现了以下功能，故弃用
+ */
+
+@Deprecated
 public class CalculateTaskThread extends Thread{
     private EntityMaid maid;
     private String message;
@@ -127,6 +132,5 @@ public class CalculateTaskThread extends Thread{
         else{
             return null;
         }
-
     }
 }

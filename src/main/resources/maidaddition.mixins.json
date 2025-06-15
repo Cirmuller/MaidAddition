@@ -5,12 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "maidaddition.refmap.json",
   "mixins": [
-    "MaidAiChatDataMixin",
-    "MaidBrainMixin"
-
   ],
   "client": [
-    "AbstractMaidContainerGuiMixin"
   ],
   "injectors": {
 	"defaultRequire": 1

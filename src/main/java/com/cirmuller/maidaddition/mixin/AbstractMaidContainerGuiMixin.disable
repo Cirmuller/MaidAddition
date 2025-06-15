@@ -1,7 +1,8 @@
 package com.cirmuller.maidaddition.mixin;
 
 import com.cirmuller.maidaddition.MaidAddition;
-import com.cirmuller.maidaddition.entity.memory.MemoryRegistry;
+import com.cirmuller.maidaddition.MaidPluginIn;
+import com.cirmuller.maidaddition.entity.memory.CanChunkLoadedMemory;
 import com.cirmuller.maidaddition.network.MaidChunkLoadingMessage;
 import com.cirmuller.maidaddition.network.NetWorkHandler;
 import com.github.tartaricacid.touhoulittlemaid.client.gui.entity.maid.AbstractMaidContainerGui;
@@ -23,11 +24,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import static com.github.tartaricacid.touhoulittlemaid.util.GuiTools.NO_ACTION;
+import java.util.Objects;
+import java.util.Optional;
 
 @Mixin(AbstractMaidContainerGui.class)
 public abstract class AbstractMaidContainerGuiMixin<T extends AbstractMaidContainer> extends AbstractContainerScreen<T> {
@@ -45,10 +44,9 @@ public abstract class AbstractMaidContainerGuiMixin<T extends AbstractMaidContai
     public void addStateButtonMixin(CallbackInfo ci){
         chunkLoadedButton=new ImageButton(leftPos + 8, topPos + 26, 9, 9, 0, 0, 10, chunkLoadedButtonResource,
                 (button)->{
-                    boolean isChunkLoaded=maid.getBrain().getMemory(MemoryRegistry.CAN_CHUNK_LOADED.get()).isPresent();
-                    if(isChunkLoaded){
-                        isChunkLoaded=maid.getBrain().getMemory(MemoryRegistry.CAN_CHUNK_LOADED.get()).get();
-                    }
+
+                    CanChunkLoadedMemory memory=maid.getData(MaidPluginIn.canChunkLoadedData);
+                    boolean isChunkLoaded=memory!=null?memory.canChunkLoaded():false;
 
                     if(!isChunkLoaded){
                         isChunkLoaded=true;
@@ -56,7 +54,6 @@ public abstract class AbstractMaidContainerGuiMixin<T extends AbstractMaidContai
                         Memory数据不会在客户端与服务端自动同步，所以我们要手动发包
                          */
                         NetWorkHandler.CHANNEL.sendToServer(new MaidChunkLoadingMessage(maid.getId(),isChunkLoaded));
-                        maid.getBrain().setMemory(MemoryRegistry.CAN_CHUNK_LOADED.get(),isChunkLoaded);
                     }
                     else{
                         isChunkLoaded=false;
@@ -64,8 +61,9 @@ public abstract class AbstractMaidContainerGuiMixin<T extends AbstractMaidContai
                         Memory数据不会在客户端与服务端自动同步，所以我们要手动发包
                          */
                         NetWorkHandler.CHANNEL.sendToServer(new MaidChunkLoadingMessage(maid.getId(),isChunkLoaded));
-                        maid.getBrain().setMemory(MemoryRegistry.CAN_CHUNK_LOADED.get(),isChunkLoaded);
                     }
+
+
                 });
         this.addRenderableWidget(chunkLoadedButton);
     }
@@ -74,11 +72,8 @@ public abstract class AbstractMaidContainerGuiMixin<T extends AbstractMaidContai
     public void renderMixin(GuiGraphics graphics,int mouseX,int mouseY,float partialTicks,CallbackInfo ci){
         if(chunkLoadedButton.isHovered()){
             MutableComponent context;
-            boolean isChunkLoaded=maid.getBrain().getMemory(MemoryRegistry.CAN_CHUNK_LOADED.get()).isPresent();
-            if(isChunkLoaded){
-                isChunkLoaded=maid.getBrain().getMemory(MemoryRegistry.CAN_CHUNK_LOADED.get()).get();
-            }
-
+            CanChunkLoadedMemory memory=maid.getData(MaidPluginIn.canChunkLoadedData);
+            boolean isChunkLoaded=memory!=null?memory.canChunkLoaded():false;
             if(isChunkLoaded) {
                 context=Component.literal("")
                         .append(Component.translatable("tooltips." + MaidAddition.MODID + ".info.chunk_loading.true"));

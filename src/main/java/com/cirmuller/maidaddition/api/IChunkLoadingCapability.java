@@ -9,4 +9,5 @@ import java.util.List;
 public interface IChunkLoadingCapability {
     void updateChunkLoading(int radius);
     EntityMaid getMaid();
+
 }

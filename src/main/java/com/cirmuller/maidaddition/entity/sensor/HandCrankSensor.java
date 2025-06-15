@@ -21,7 +21,6 @@ public class HandCrankSensor extends Sensor<EntityMaid> {
     }
     @Override
     protected void doTick(ServerLevel serverLevel, EntityMaid entityMaid) {
-
         HandCrankBlockEntity handCrankBlockEntity=null;
         BlockPos pos=entityMaid.getOnPos();
         for(int i=0;i<=entityMaid.getTask().searchRadius(entityMaid);i++){
@@ -40,10 +39,10 @@ public class HandCrankSensor extends Sensor<EntityMaid> {
     }
 
 
-    /*
+    /**
     扫描以center为中心，以radius为半径（Minkovski距离或$L^\infty$距离）的球面上的手摇曲柄
     scan the hand crank on the sphere centering at $center$ with Minkovski(or $L^\infty$) radius $radius$
-     */
+     **/
     @Nullable
     private HandCrankBlockEntity searchHandCrankBlockEntity(ServerLevel serverLevel,Vec3i center, int radius){
         int xMin,yMin,zMin,xMax,yMax,zMax,x,y,z;

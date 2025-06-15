@@ -1,9 +1,10 @@
 package com.cirmuller.maidaddition.entity.task;
 
 import com.cirmuller.maidaddition.MaidAddition;
-import com.cirmuller.maidaddition.entity.behaviour.ChunkLoadingBehaviour;
+import com.cirmuller.maidaddition.entity.behaviour.CraftingAndCarryingBehaviour;
 import com.github.tartaricacid.touhoulittlemaid.api.task.IMaidTask;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.resources.ResourceLocation;
@@ -15,17 +16,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-@Deprecated
-public class ChunkLoadingTask implements IMaidTask {
-
+public class CraftingAndCarryingTask implements IMaidTask {
     @Override
     public ResourceLocation getUid() {
-        return new ResourceLocation(MaidAddition.MODID,"chunk_loading_task");
+        return new ResourceLocation(MaidAddition.MODID,"crafting_and_carrying_task");
     }
 
     @Override
     public ItemStack getIcon() {
-        return Items.BEDROCK.getDefaultInstance();
+        return Items.CRAFTING_TABLE.getDefaultInstance();
     }
 
     @Nullable
@@ -36,7 +35,6 @@ public class ChunkLoadingTask implements IMaidTask {
 
     @Override
     public List<Pair<Integer, BehaviorControl<? super EntityMaid>>> createBrainTasks(EntityMaid entityMaid) {
-        return Lists.newArrayList(Pair.of(5, new ChunkLoadingBehaviour()));
-
+        return Lists.newArrayList(new Pair<>(0,new CraftingAndCarryingBehaviour()));
     }
 }

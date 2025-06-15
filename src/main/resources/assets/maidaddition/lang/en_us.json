@@ -4,5 +4,9 @@
   "task.maidaddition.chunk_loading_task.desc": "Maid can load the chunks nearby",
   "task.maidaddition.hand_crank_task.desc": "Maid can use the handcrank in mod Create",
   "tooltips.maidaddition.info.chunk_loading.true": "Loading chunks: enable",
-  "tooltips.maidaddition.info.chunk_loading.false":"Loading chunks: disable"
+  "tooltips.maidaddition.info.chunk_loading.false":"Loading chunks: disable",
+  "message.maidaddition.996_is_felicity": "996 is felicity",
+  "message.maidaddition.you_will_be_grateful_to_yourself_tomorrow_for_struggling_today": "You will be grateful to yourself tomorrow for struggling today",
+  "message.maidaddition.thanks_for_providing_work_by_player": "Thanks %s for providing work for me",
+  "message.maidaddition.struggle_for_owner": "Ask not what %s can do for you, ask what you can do for %s"
 }

@@ -24,13 +24,9 @@ public class ChunkLoadingCapability implements IChunkLoadingCapability {
     public static Logger logger= LogManager.getLogger(MaidAddition.MODID);
     EntityMaid maid;
 
-
     public ChunkLoadingCapability(EntityMaid maid){
         this.maid=maid;
-
-
     }
-
 
     @Override
     public EntityMaid getMaid() {

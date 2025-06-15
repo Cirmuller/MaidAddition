@@ -1,7 +1,9 @@
 package com.cirmuller.maidaddition.network;
 
 import com.cirmuller.maidaddition.MaidAddition;
+import com.cirmuller.maidaddition.entity.memory.CanChunkLoadedMemory;
 import com.cirmuller.maidaddition.entity.memory.MemoryRegistry;
+import com.cirmuller.maidaddition.MaidPluginIn;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -10,6 +12,7 @@ import net.minecraftforge.network.NetworkEvent;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.function.Supplier;
+
 
 public class MaidChunkLoadingMessage {
     private int maidId;
@@ -39,10 +42,10 @@ public class MaidChunkLoadingMessage {
                         }
                         Entity entity=player.level().getEntity(message.maidId);
                         if(entity instanceof EntityMaid entityMaid&&entityMaid.isOwnedBy(player)){
-                            LogManager.getLogger(MaidAddition.MODID).info("Now the Memory is "+message.usable);
+                            LogManager.getLogger(MaidAddition.MODID).info("Now the canChunkLoadMemory is "+message.usable);
                             entityMaid.getBrain().setMemory(MemoryRegistry.CAN_CHUNK_LOADED.get(),message.usable);
+                            entityMaid.setAndSyncData(MaidPluginIn.canChunkLoadedData, new CanChunkLoadedMemory(message.usable));
                         }
-
                     }
             );
 

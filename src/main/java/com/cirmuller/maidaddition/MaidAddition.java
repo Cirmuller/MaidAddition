@@ -20,7 +20,6 @@ public class MaidAddition {
         IEventBus bus=FMLJavaModLoadingContext.get().getModEventBus();
         SensorRegistry.SENSOR_TYPE_DEFERRED_REGISTER.register(bus);
         MemoryRegistry.MEMORY_MODULE_TYPE_DEFERRED_REGISTER.register(bus);
-        CalculateTaskThread.init();
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON,Config.COMMON_CONFIG);
     }
 }

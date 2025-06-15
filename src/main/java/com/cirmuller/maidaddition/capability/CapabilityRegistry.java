@@ -25,8 +25,6 @@ public class CapabilityRegistry {
         if(maid instanceof EntityMaid&&!event.getObject().level().isClientSide){
             event.addCapability(new ResourceLocation(MaidAddition.MODID,"chunk_loading_capability"),new ChunkLoadingCapabilityProvider((EntityMaid) maid));
         }
-
-
     }
 
     @SubscribeEvent
