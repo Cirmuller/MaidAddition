@@ -2,6 +2,7 @@ package com.cirmuller.maidaddition.entity.memory;
 
 import com.cirmuller.maidaddition.MaidAddition;
 import com.cirmuller.maidaddition.Utils.CraftingTasks.CraftingTask;
+import com.cirmuller.maidaddition.entity.navigation.PathFindingNavigation;
 import com.cirmuller.maidaddition.threads.CalculateCraftingStackThread;
 import com.mojang.serialization.Codec;
 import com.simibubi.create.content.kinetics.crank.HandCrankBlockEntity;
@@ -22,6 +23,6 @@ public class MemoryRegistry {
             ()->new MemoryModuleType<>(Optional.of(Codec.BOOL)));
     public static RegistryObject<MemoryModuleType<CraftingAndCarryingMemory>> CRAFTING_AND_CARRYING_MEMORY=MEMORY_MODULE_TYPE_DEFERRED_REGISTER.register("crafting_and_carrying_memory",
             ()->new MemoryModuleType<>(Optional.empty()));
-
-
+    public static RegistryObject<MemoryModuleType<PathFindingNavigation>> PATH_FINDING_NAVIGATION=MEMORY_MODULE_TYPE_DEFERRED_REGISTER.register("path_finding_navigation",
+            ()->new MemoryModuleType<>(Optional.empty()));
 }

@@ -13,6 +13,7 @@ public class TaskInit {
         if(ModList.get().isLoaded(Create.ID)){
             manager.add(new UseHandCrankTask());
         }
+        manager.add(new ArchaeologizingTask());
 
 //        if(ModList.get().isLoaded(MaidStorageManager.MODID)){
 //            manager.add(new CraftingAndCarryingTask());

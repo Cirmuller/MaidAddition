@@ -27,6 +27,7 @@ public class MaidBrain implements IExtraMaidBrain {
         if(ModList.get().isLoaded(Create.ID)){
             list.add(MemoryRegistry.HAND_CRANK_TARGET.get());
         }
+        list.add(MemoryRegistry.PATH_FINDING_NAVIGATION.get());
 
 //        if(ModList.get().isLoaded(MaidStorageManager.MODID)){
 //            list.add(MemoryRegistry.CRAFTING_AND_CARRYING_MEMORY.get());

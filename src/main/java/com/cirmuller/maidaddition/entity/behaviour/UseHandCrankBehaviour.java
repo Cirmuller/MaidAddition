@@ -152,4 +152,10 @@ public class UseHandCrankBehaviour extends Behavior<EntityMaid> {
                 yield Component.translatable(bubbles[index]);
         };
     }
+
+    @Override
+    protected void stop(ServerLevel pLevel, EntityMaid pEntity, long pGameTime) {
+        super.stop(pLevel, pEntity, pGameTime);
+        pEntity.getBrain().eraseMemory(MemoryModuleType.WALK_TARGET);
+    }
 }

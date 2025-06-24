@@ -3,13 +3,16 @@
   "task.maidaddition.hand_crank_task": "手摇曲柄",
   "task.maidaddition.chunk_loading_task.desc": "女仆能加载附近一定范围内的区块",
   "task.maidaddition.hand_crank_task.desc": "女仆能主动摇机械动力的手摇曲柄",
+  "task.maidaddition.archaeology": "考古",
   "tooltips.maidaddition.info.chunk_loading.true": "加载区块:启用",
   "tooltips.maidaddition.info.chunk_loading.false":"加载区块:禁用",
   "message.maidaddition.whether_chunks_being_loading": "区块是否正在加载: %d",
   "message.maidaddition.996_is_felicity": "996是福报",
   "message.maidaddition.you_will_be_grateful_to_yourself_tomorrow_for_struggling_today": "明天的你会感谢今天奋斗的自己",
   "message.maidaddition.thanks_for_providing_work_by_player": "感谢%s为我提供工作",
-  "message.maidaddition.struggle_for_owner": "不要想着%s为你提供了什么，要想想你能为%s提供什么"
+  "message.maidaddition.struggle_for_owner": "不要想着%s为你提供了什么，要想想你能为%s提供什么",
+  "message.maidaddition.have_no_brush": "主人，没工具怎么考古？",
+  "message.maidaddition.brush_is_broken": "主人，我刷子坏了，麻烦拿个刷子过来"
 
 
 

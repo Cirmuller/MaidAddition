@@ -3,6 +3,7 @@
   "task.maidaddition.hand_crank_task": "Use handcrank",
   "task.maidaddition.chunk_loading_task.desc": "Maid can load the chunks nearby",
   "task.maidaddition.hand_crank_task.desc": "Maid can use the handcrank in mod Create",
+  "task.maidaddition.archaeology": "Archaeology",
   "tooltips.maidaddition.info.chunk_loading.true": "Loading chunks: enable",
   "tooltips.maidaddition.info.chunk_loading.false":"Loading chunks: disable",
   "message.maidaddition.996_is_felicity": "996 is felicity",

@@ -3,7 +3,6 @@ buildscript {
         maven { url = 'https://maven.minecraftforge.net' }
         mavenCentral()
         maven { url = 'https://repo.spongepowered.org/repository/maven-public' }
-        //maven { url = 'https://maven.parchmentmc.org' }
         maven { url = 'https://maven.parchmentmc.org' }
     }
     dependencies {
@@ -20,19 +19,20 @@ plugins {
 }
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
+apply plugin: 'java'
 version = mod_version
 group = mod_group_id
 
 base {
     archivesName = mod_id
 }
-reobf {
-    jarJar{ }
-}
+//reobf {
+//    jarJar{ }
+//}
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-jarJar.enable()
-tasks.jarJar.finalizedBy('reobfJarJar')
+
+//tasks.jarJar.finalizedBy('reobfJarJar')
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
     mappings channel: 'parchment', version: "2023.09.03-${minecraft_version}"
@@ -42,7 +42,7 @@ minecraft {
         configureEach {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'info'
+            property 'forge.logging.console.level', 'debug'
             mods {
                 "${mod_id}" {
                     source sourceSets.main
@@ -54,7 +54,7 @@ minecraft {
             workingDirectory project.file('run')
             arg "-mixin.config=${mod_id}.mixins.json"
             property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'info'
+            property 'forge.logging.console.level', 'debug'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
@@ -68,7 +68,7 @@ minecraft {
             workingDirectory project.file('run')
             arg "-mixin.config=${mod_id}.mixins.json"
             property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'info'
+            property 'forge.logging.console.level', 'debug'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
@@ -82,7 +82,7 @@ minecraft {
             workingDirectory project.file('run')
             arg "-mixin.config=${mod_id}.mixins.json"
             property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'info'
+            property 'forge.logging.console.level', 'debug'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
@@ -141,14 +141,19 @@ repositories {
         url = "https://modmaven.dev"
     }
 
-}
 
+    maven{
+        url="https://mvnrepository.com/artifact/org.jgrapht/jgrapht-core"
+    }
+
+}
+jarJar.enable()
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     compileOnly(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-common:${mixin_extras_version}"))
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
-    implementation fg.deobf("curse.maven:touhou-little-maid-355044:6613821") //1.20.1
+    implementation fg.deobf("curse.maven:touhou-little-maid-355044:6657436") //1.20.1
     //implementation fg.deobf("curse.maven:touhou-little-maid-355044:6440959")// 1.21.1
 
     runtimeOnly fg.deobf("curse.maven:patchouli-306770:4633797")//1.20.1
@@ -172,8 +177,11 @@ dependencies {
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
     // at runtime, use the full JEI jar for Forge
     runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
-    implementation("org.apache.commons:commons-collections4:4.3")
     implementation(fg.deobf("curse.maven:maid-storage-manager-1210244:6649322"))
+    implementation(fg.deobf("curse.maven:just-enough-character-250702:6680042"))
+    jarJar(minecraftLibrary(group: 'org.jgrapht', name: 'jgrapht-core', version: '1.5.2')){
+        jarJar.pin(it,"1.5.2")
+    }
 
 }
 
