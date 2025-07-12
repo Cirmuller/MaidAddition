@@ -21,8 +21,8 @@ import java.util.Map;
 import java.util.Optional;
 
 public class FindingPathBehaviour extends Behavior<EntityMaid> {
-    public static int horizon=24;
-    public static int height=8;
+    public static int horizon=16;
+    public static int height=6;
     Logger logger= LogManager.getLogger(MaidAddition.MODID);
 
     public FindingPathBehaviour() {

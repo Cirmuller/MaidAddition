@@ -15,6 +15,7 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    //id("com.github.johnrengelman.shadow") version "8.1.1"
 //   id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 apply plugin: 'org.spongepowered.mixin'
@@ -168,7 +169,7 @@ dependencies {
     //implementation("com.tterrag.registrate:Registrate:MC1.20-1.3.3")
     //modImplementation(jarJar("com.tterrag.registrate:Registrate:MC1.20-1.3.3"))
     compileOnly(fg.deobf("com.tterrag.registrate:Registrate:MC1.20-1.3.3"))
-    jarJar(group: 'com.tterrag.registrate', name: 'Registrate', version: "[MC1.19.3,MC1.20)")
+    //jarJar(group: 'com.tterrag.registrate', name: 'Registrate', version: "[MC1.19.3,MC1.20)")
     compileOnly(fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:1.0.51"))
     compileOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-api-${minecraft_version}:1.0.1"))
     compileOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:1.0.1"))
@@ -180,9 +181,14 @@ dependencies {
     implementation(fg.deobf("curse.maven:maid-storage-manager-1210244:6649322"))
     implementation(fg.deobf("curse.maven:just-enough-character-250702:6680042"))
     jarJar(minecraftLibrary(group: 'org.jgrapht', name: 'jgrapht-core', version: '1.5.2')){
-        jarJar.pin(it,"1.5.2")
+        jarJar.ranged(it,"[1.5.2,)")
     }
-
+    jarJar(minecraftLibrary(group: 'org.apfloat', name: 'apfloat', version: '1.10.1')){
+        jarJar.ranged(it,"[1.10.1,)")
+    }
+    jarJar(minecraftLibrary(group: 'org.jheaps', name: 'jheaps', version: '0.14')){
+        jarJar.ranged(it,"[0.14,)")
+    }
 }
 
 tasks.named('processResources', ProcessResources).configure {
