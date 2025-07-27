@@ -45,6 +45,7 @@ public class BrushSandBehaviour extends Behavior<EntityMaid> {
                 maid.getBrain().eraseMemory(InitEntities.TARGET_POS.get());
             }
         }catch (NullPointerException|NoSuchElementException exception){
+            exception.printStackTrace();
             maid.getBrain().eraseMemory(InitEntities.TARGET_POS.get());
         }catch (HaveNoToolException exception){
             logger.debug(String.format("Maid %d with owner %s has no brush",maid.getId(),maid.getOwner().getScoreboardName()));

@@ -64,9 +64,11 @@ public class WalkingToSuspiciousSandBehaviour extends Behavior<EntityMaid> {
 
         try{
             navigation.getActions().execute(maid);
-            if(navigation.getActions().isEmpty()&&maid.getOnPos().closerThan(navigation.getTarget(),0.5)){
+            if(navigation.getActions().isEmpty()){
                 navigation.setOutdate();
-                maid.getBrain().setMemory(InitEntities.TARGET_POS.get(), new BlockPosTracker(navigation.getTarget()));
+                if(navigation.getTarget().above().closerToCenterThan(new Vec3(maid.getX(),maid.getY(),maid.getZ()),0.8f)) {
+                    maid.getBrain().setMemory(InitEntities.TARGET_POS.get(), new BlockPosTracker(navigation.getTarget()));
+                }
             }
         }catch(LackBlockException | TimeoutException exception){
             logger.debug(exception.getMessage());

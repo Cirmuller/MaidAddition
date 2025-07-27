@@ -5,8 +5,11 @@ import com.cirmuller.maidaddition.entity.behaviour.BrushSandBehaviour;
 import com.cirmuller.maidaddition.entity.behaviour.CraftingAndCarryingBehaviour;
 import com.cirmuller.maidaddition.entity.behaviour.FindingPathBehaviour;
 import com.cirmuller.maidaddition.entity.behaviour.WalkingToSuspiciousSandBehaviour;
+import com.cirmuller.maidaddition.entity.memory.MemoryRegistry;
+import com.cirmuller.maidaddition.entity.navigation.PathFindingNavigation;
 import com.github.tartaricacid.touhoulittlemaid.api.task.IMaidTask;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
+import com.github.tartaricacid.touhoulittlemaid.init.InitEntities;
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.resources.ResourceLocation;
@@ -46,7 +49,15 @@ public class ArchaeologizingTask implements IMaidTask {
 
     @Override
     public boolean enableLookAndRandomWalk(EntityMaid maid) {
-        return false;
+        PathFindingNavigation navigation=maid.getBrain().getMemory(MemoryRegistry.PATH_FINDING_NAVIGATION.get()).orElse(null);
+        if(navigation==null){
+            return true;
+        }else if(maid.getBrain().getMemory(InitEntities.TARGET_POS.get()).isPresent()){
+            return false;
+        }
+        else{
+            return !navigation.isTerminated()||navigation.isOutdate();
+        }
     }
 
 }

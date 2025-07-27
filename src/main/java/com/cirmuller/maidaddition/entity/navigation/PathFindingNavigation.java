@@ -1,5 +1,6 @@
 package com.cirmuller.maidaddition.entity.navigation;
 
+import com.cirmuller.maidaddition.MaidAddition;
 import com.cirmuller.maidaddition.Utils.Action.ActionQueue;
 import com.cirmuller.maidaddition.Utils.Action.DestroyBlockAction;
 import com.cirmuller.maidaddition.exception.FindNoPathException;
@@ -7,14 +8,21 @@ import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.pathfinder.NodeEvaluator;
+import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
+import org.jgrapht.alg.shortestpath.AStarShortestPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.*;
 
@@ -22,7 +30,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class PathFindingNavigation {
-    ServerLevel level;
+    BlockGetter level;
     BlockPos end;
     BlockPos start;
     BoundingBox region;
@@ -37,6 +45,7 @@ public class PathFindingNavigation {
     public static double highWeight=20;
     public static double lowWeight=1;
 
+    public static Logger logger= LogManager.getLogger(MaidAddition.MODID);
     /**
      * 本类可以根据传入的参数自动生成寻路路径，计算结束后生成的行为动作队列存放于@link actions中
      * @param maid 女仆
@@ -50,7 +59,7 @@ public class PathFindingNavigation {
                                  Predicate<ItemStack> buildingBlockPredicate,
                                  Predicate<BlockPos> breakableBlockPredicate,
                                  BoundingBox region){
-        this.level=(ServerLevel) maid.level();
+        this.level=maid.level();
         this.start=maid.getOnPos();
         this.region=region;
         this.isOutdate=false;
@@ -117,12 +126,14 @@ public class PathFindingNavigation {
                         }
                     }
                 }
-                GraphPath<BlockPos,CallbackEdge> graphPath=new DijkstraShortestPath(graph).getPath(start,end);
+                //GraphPath<BlockPos,CallbackEdge> graphPath=new DijkstraShortestPath(graph).getPath(start,end);
+                GraphPath<BlockPos,CallbackEdge> graphPath=new AStarShortestPath<>(graph,new ManhattanAdmissibleHeuristic<>()).getPath(start,end);
                 if(graphPath!=null) {
                     path = graphPath.getVertexList();
                     edges = graphPath.getEdgeList();
                     isTerminated = true;
                     actions=ActionQueue.create(PathFindingNavigation.this);
+                    logger.debug(graphPath.toString());
                 }else{
                     isOutdate=true;
                     isTerminated = true;
@@ -381,12 +392,15 @@ public class PathFindingNavigation {
             }
 
             public boolean hasFluidNearby(BlockPos pos){
-                return  level.isFluidAtPosition(pos,(fluidState -> !fluidState.isEmpty()))||
-                        level.isFluidAtPosition(pos.above(),(fluidState -> !fluidState.isEmpty()))||
-                        level.isFluidAtPosition(pos.east(),(fluidState -> !fluidState.isEmpty()))||
-                        level.isFluidAtPosition(pos.west(),(fluidState -> !fluidState.isEmpty()))||
-                        level.isFluidAtPosition(pos.north(),(fluidState -> !fluidState.isEmpty()))||
-                        level.isFluidAtPosition(pos.south(),(fluidState -> !fluidState.isEmpty()));
+                return isFluidAtPosition(pos)||
+                        isFluidAtPosition(pos.above())||
+                        isFluidAtPosition(pos.east())||
+                        isFluidAtPosition(pos.west())||
+                        isFluidAtPosition(pos.north())||
+                        isFluidAtPosition(pos.south());
+            }
+            public boolean isFluidAtPosition(BlockPos pos){
+                return !level.getFluidState(pos).isEmpty();
             }
             public boolean canSafelyDestroy(BlockPos pos){
                 return !hasFluidNearby(pos)&&!(level.getBlockState(pos.above()).getBlock() instanceof FallingBlock)&&breakableBlockPredicate.test(pos);
@@ -398,7 +412,13 @@ public class PathFindingNavigation {
 
         };
         thread.setDaemon(true);
-        thread.start();
+        thread.setName("MaidAddition navigation calculating thread-"+thread.getId());
+        if(maid.getNavigation()instanceof GroundPathNavigation){
+            thread.start();
+        }else{
+            isTerminated=true;
+            isOutdate=true;
+        }
 
 
     }
@@ -422,6 +442,9 @@ public class PathFindingNavigation {
     }
     public BlockPos getTarget(){
         return this.end;
+    }
+    public BlockPos getStart(){
+        return this.start;
     }
 
 }
