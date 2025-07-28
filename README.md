@@ -4,7 +4,7 @@
 
 1. 女仆能加载周围的区块，在加载的区块中，实体、随机刻等会被运算。
 2. 女仆能使用机械动力的手摇曲柄
-3. 增加了简单的中文语言识别，使得女仆能根据用户语言输入自动切换任务。
+3. 增加了考古功能。
 ### 致谢
 
 1. 车万女仆模组：酒石酸菌等
@@ -25,7 +25,7 @@ This is an addon for Touhou Little Maid. We add 3 features for the maids:
 
 1. Maids can load the chunks nearby. On the chunks loaded by maids, entities, random ticks etc. would be computed.
 2. Maids can use the handcranks in Create.
-3. A simple Chinese speech recognization based on matching the regular expressions is added so that when users say something to maids, maids may switch the tasks they are currently doing.
+3. Maids can do archaeology work.
 ### Credits
 
 1. Touhou Little Maid: TartaricAcid et al.
