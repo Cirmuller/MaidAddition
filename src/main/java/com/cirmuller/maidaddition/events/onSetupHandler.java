@@ -26,7 +26,7 @@ public class onSetupHandler {
 
 
     /**
-    *此方法应当只在客户端调用
+    *此方法应当只在客户端调用，服务端禁止调用
     @SubscribeEvent
     public static void onClientSetupEvent(RegisterKeyMappingsEvent event){
         event.register(KEY_DEBUG);
