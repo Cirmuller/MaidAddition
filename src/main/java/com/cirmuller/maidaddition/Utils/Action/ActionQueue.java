@@ -68,7 +68,7 @@ public class ActionQueue<T extends Entity> extends LinkedList<Action<T>> impleme
             }else if(count!=0){
                 Node targetNode=nodes.get(nodes.size()-1);
                 BlockPos target=new BlockPos(targetNode.x,targetNode.y,targetNode.z);
-                Path walkPath=new Path(new ArrayList<>(nodes),target,false);
+                Path walkPath=new Path(new ArrayList<>(nodes),target,true);
                 walkPath.setNextNodeIndex(0);
                 result.offer(new WalkThroughPathAction<>(walkPath));
                 nodes.clear();

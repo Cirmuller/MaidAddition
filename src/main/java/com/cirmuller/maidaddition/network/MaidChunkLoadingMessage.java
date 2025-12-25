@@ -42,7 +42,7 @@ public class MaidChunkLoadingMessage {
                         }
                         Entity entity=player.level().getEntity(message.maidId);
                         if(entity instanceof EntityMaid entityMaid&&entityMaid.isOwnedBy(player)){
-                            LogManager.getLogger(MaidAddition.MODID).info("Now the canChunkLoadMemory is "+message.usable);
+                            //LogManager.getLogger(MaidAddition.MODID).debug("Now the canChunkLoadMemory is "+message.usable);
                             entityMaid.getBrain().setMemory(MemoryRegistry.CAN_CHUNK_LOADED.get(),message.usable);
                             entityMaid.setAndSyncData(MaidPluginIn.canChunkLoadedData, new CanChunkLoadedMemory(message.usable));
                         }

@@ -67,7 +67,7 @@ public class ChunkLoadingBehaviour extends Behavior<EntityMaid> {
         capability.ifPresent(
                 (cap)->{
                     cap.updateChunkLoading(radius);
-                    logger.info(String.format("Maid %d is loading chunks",maid.getId()));
+                    //logger.debug(String.format("Maid %d is loading chunks",maid.getId()));
                 }
         );
         super.tick(level,maid,time);
@@ -75,7 +75,7 @@ public class ChunkLoadingBehaviour extends Behavior<EntityMaid> {
 
     @Override
     protected void stop(ServerLevel level, EntityMaid maid, long time) {
-        logger.info(String.format("Maid %d stops loading chunks",maid.getId()));
+        //logger.debug(String.format("Maid %d stops loading chunks",maid.getId()));
         super.stop(level, maid, time);
     }
 
