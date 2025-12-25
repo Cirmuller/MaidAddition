@@ -2,9 +2,7 @@ package com.cirmuller.maidaddition.entity.task;
 
 import com.github.tartaricacid.touhoulittlemaid.entity.task.TaskManager;
 import com.simibubi.create.Create;
-import net.minecraftforge.fml.ModList;
-import studio.fantasyit.maid_storage_manager.MaidStorageManager;
-import studio.fantasyit.maid_storage_manager.storage.MaidStorage;
+import net.neoforged.fml.ModList;
 
 public class TaskInit {
     public static void addTask(TaskManager manager){

@@ -12,8 +12,7 @@ import net.minecraft.world.entity.ai.behavior.BehaviorControl;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
-import net.minecraftforge.fml.ModList;
-import studio.fantasyit.maid_storage_manager.MaidStorageManager;
+import net.neoforged.fml.ModList;
 
 import java.util.ArrayList;
 import java.util.Collections;

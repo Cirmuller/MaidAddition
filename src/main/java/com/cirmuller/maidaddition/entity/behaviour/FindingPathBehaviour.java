@@ -13,7 +13,6 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.BrushableBlock;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraftforge.common.Tags;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

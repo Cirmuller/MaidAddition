@@ -9,8 +9,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.items.wrapper.EntityHandsInvWrapper;
-import net.minecraftforge.items.wrapper.RangedWrapper;
+import net.neoforged.neoforge.items.wrapper.EntityHandsInvWrapper;
+import net.neoforged.neoforge.items.wrapper.RangedWrapper;
 
 public class DestroyBlockAction extends LongTermAction<EntityMaid> {
     BlockPos target;
@@ -60,7 +60,7 @@ public class DestroyBlockAction extends LongTermAction<EntityMaid> {
         maid.swing(InteractionHand.MAIN_HAND);
         if(success(maid)){
             maid.destroyBlock(target,true);
-            itemInMainHand.hurtAndBreak(1,maid,(md)->{});
+            itemInMainHand.hurtAndBreak(1, (ServerLevel) maid.level(),maid,(md)->{});
         }
         handsInvWrapper.insertItem(0,itemInMainHand,false);
         return super.execute(maid);

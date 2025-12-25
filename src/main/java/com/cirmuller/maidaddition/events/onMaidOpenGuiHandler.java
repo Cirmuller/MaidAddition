@@ -6,6 +6,7 @@ import com.cirmuller.maidaddition.entity.memory.CanChunkLoadedMemory;
 import com.cirmuller.maidaddition.network.MaidChunkLoadingMessage;
 import com.cirmuller.maidaddition.network.NetWorkHandler;
 import com.github.tartaricacid.touhoulittlemaid.api.event.client.MaidContainerGuiEvent;
+import com.github.tartaricacid.touhoulittlemaid.client.gui.widget.button.TouhouImageButton;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -15,25 +16,26 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(value=Dist.CLIENT)
+@EventBusSubscriber(value=Dist.CLIENT)
 public class onMaidOpenGuiHandler {
-    private static final ResourceLocation chunkLoadedButtonResource=new ResourceLocation(MaidAddition.MODID,"textures/gui/maid_gui_button.png");
+    private static final ResourceLocation chunkLoadedButtonResource=ResourceLocation.tryBuild(MaidAddition.MODID,"textures/gui/maid_gui_button.png");
     private static final String buttonName=MaidAddition.MODID+".chunk_loading_button";
     @SubscribeEvent
     public static void onMaidOpenGui(MaidContainerGuiEvent.Init event){
         EntityMaid maid=event.getGui().getMaid();
         int leftPos=event.getLeftPos();
         int topPos=event.getTopPos();
-        ImageButton chunkLoadedButton=new ImageButton(leftPos + 8, topPos + 26, 9, 9, 0, 0, 10, chunkLoadedButtonResource,
+        TouhouImageButton chunkLoadedButton=new TouhouImageButton(leftPos + 8, topPos + 26, 9, 9, 0, 0, 10, chunkLoadedButtonResource,
                 (button)->{
 
                     CanChunkLoadedMemory memory=maid.getData(MaidPluginIn.canChunkLoadedData);
@@ -44,14 +46,14 @@ public class onMaidOpenGuiHandler {
                         /*
                         Memory数据不会在客户端与服务端自动同步，所以我们要手动发包
                          */
-                        NetWorkHandler.CHANNEL.sendToServer(new MaidChunkLoadingMessage(maid.getId(),isChunkLoaded));
+                        PacketDistributor.sendToServer(new MaidChunkLoadingMessage(maid.getId(),isChunkLoaded));
                     }
                     else{
                         isChunkLoaded=false;
                         /*
                         Memory数据不会在客户端与服务端自动同步，所以我们要手动发包
                          */
-                        NetWorkHandler.CHANNEL.sendToServer(new MaidChunkLoadingMessage(maid.getId(),isChunkLoaded));
+                        PacketDistributor.sendToServer(new MaidChunkLoadingMessage(maid.getId(),isChunkLoaded));
                     }
 
 

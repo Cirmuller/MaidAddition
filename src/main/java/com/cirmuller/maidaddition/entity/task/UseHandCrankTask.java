@@ -20,12 +20,12 @@ public class UseHandCrankTask implements IMaidTask {
     private static final float searchRadius=32;
     @Override
     public ResourceLocation getUid() {
-        return new ResourceLocation(MaidAddition.MODID,"hand_crank_task");
+        return ResourceLocation.tryBuild(MaidAddition.MODID,"hand_crank_task");
     }
 
     @Override
     public ItemStack getIcon() {
-        return AllBlocks.HAND_CRANK.asItem().getDefaultInstance();
+        return AllBlocks.HAND_CRANK.get().asItem().getDefaultInstance();
     }
 
     @Nullable

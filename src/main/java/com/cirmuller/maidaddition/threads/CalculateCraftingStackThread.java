@@ -9,9 +9,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.checkerframework.checker.units.qual.C;
 
 import javax.annotation.Nullable;
@@ -32,11 +31,11 @@ public class CalculateCraftingStackThread extends Thread{
             for(BlockPos chest:chests){
                 BlockEntity chestEntity=level.getBlockEntity(chest);
                 if(chestEntity!=null){
-                    LazyOptional<IItemHandler> capability=chestEntity.getCapability(ForgeCapabilities.ITEM_HANDLER);
-                    capability.ifPresent((cap)-> {
-                        int sz=cap.getSlots();
+                    IItemHandler capability= level.getCapability(Capabilities.ItemHandler.BLOCK,chestEntity.getBlockPos(),null);
+                    if(capability!=null){
+                        int sz=capability.getSlots();
                         for(int i=0;i<sz;i++){
-                            ItemStack stack=cap.getStackInSlot(i);
+                            ItemStack stack=capability.getStackInSlot(i);
                             if(stack.getItem().equals(item)){
                                 result.index=i;
                                 result.pos=chest;
@@ -44,7 +43,6 @@ public class CalculateCraftingStackThread extends Thread{
                             }
                         }
                     }
-                    );
                     if(result.index!=-1){
                         break;
                     }
@@ -86,7 +84,7 @@ public class CalculateCraftingStackThread extends Thread{
     }
     public boolean addChest(BlockPos pos){
         BlockEntity chest=level.getBlockEntity(pos);
-        if(chest==null||!chest.getCapability(ForgeCapabilities.ITEM_HANDLER).isPresent()){
+        if(chest==null||level.getCapability(Capabilities.ItemHandler.BLOCK,chest.getBlockPos(),null)==null){
             return false;
         }
         if(chests.contains(pos)){
@@ -154,14 +152,13 @@ public class CalculateCraftingStackThread extends Thread{
             if(chest==null){
                 continue;
             }
-            LazyOptional<IItemHandler> capability=chest.getCapability(ForgeCapabilities.ITEM_HANDLER);
-            capability.ifPresent((cap)->{
-                int sz=cap.getSlots();
+            IItemHandler capability=level.getCapability(Capabilities.ItemHandler.BLOCK,chest.getBlockPos(),null);
+            if(capability!=null){
+                int sz=capability.getSlots();
                 for(int i=0;i<sz;i++){
-                    result.add(cap.getStackInSlot(i));
+                    result.add(capability.getStackInSlot(i));
                 }
-            });
-
+            }
         }
         return result;
     }

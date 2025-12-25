@@ -1,8 +1,7 @@
 package com.cirmuller.maidaddition.entity.behaviour;
 
 import com.cirmuller.maidaddition.MaidAddition;
-import com.cirmuller.maidaddition.api.IChunkLoadingCapability;
-import com.cirmuller.maidaddition.capability.ModCapability;
+import com.cirmuller.maidaddition.Utils.ChunkLoading;
 import com.cirmuller.maidaddition.configs.Config;
 import com.cirmuller.maidaddition.entity.memory.MemoryRegistry;
 import com.cirmuller.maidaddition.entity.task.ChunkLoadingTask;
@@ -11,7 +10,6 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
-import net.minecraftforge.common.util.LazyOptional;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import java.util.HashMap;
@@ -63,13 +61,7 @@ public class ChunkLoadingBehaviour extends Behavior<EntityMaid> {
             return;
         }
         currentTick=0;
-        LazyOptional<IChunkLoadingCapability> capability=maid.getCapability(ModCapability.CHUNK_LOADING_CAPABILITY);
-        capability.ifPresent(
-                (cap)->{
-                    cap.updateChunkLoading(radius);
-                    //logger.debug(String.format("Maid %d is loading chunks",maid.getId()));
-                }
-        );
+        ChunkLoading.chunkLoad(maid,radius);
         super.tick(level,maid,time);
     }
 

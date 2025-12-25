@@ -29,6 +29,6 @@ public class MaidPluginIn implements ILittleMaid {
 
     @Override
     public void registerTaskData(TaskDataRegister register) {
-        canChunkLoadedData=register.register(new ResourceLocation(MaidAddition.MODID,"can_chunk_loaded_data"), CanChunkLoadedMemory.CODEC);
+        canChunkLoadedData=register.register(ResourceLocation.tryBuild(MaidAddition.MODID,"can_chunk_loaded_data"), CanChunkLoadedMemory.CODEC);
     }
 }

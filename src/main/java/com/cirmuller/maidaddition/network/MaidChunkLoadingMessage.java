@@ -5,38 +5,42 @@ import com.cirmuller.maidaddition.entity.memory.CanChunkLoadedMemory;
 import com.cirmuller.maidaddition.entity.memory.MemoryRegistry;
 import com.cirmuller.maidaddition.MaidPluginIn;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
+import com.github.tartaricacid.touhoulittlemaid.network.message.ItemBreakPackage;
+import com.github.tartaricacid.touhoulittlemaid.network.message.MaidModelPackage;
+import com.sun.jna.platform.win32.WinDef;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
+import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraftforge.network.NetworkEvent;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.function.Supplier;
 
+import static com.github.tartaricacid.touhoulittlemaid.util.ResourceLocationUtil.getResourceLocation;
 
-public class MaidChunkLoadingMessage {
-    private int maidId;
-    private boolean usable;
 
-    public MaidChunkLoadingMessage(int maidId,boolean usable){
-        this.maidId=maidId;
-        this.usable=usable;
-    }
+public record MaidChunkLoadingMessage(int maidId, boolean usable) implements CustomPacketPayload {
+    public static final CustomPacketPayload.Type<MaidChunkLoadingMessage> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.tryBuild(MaidAddition.MODID,"maid_chunk_loading_message"));
+    public static final StreamCodec<ByteBuf, MaidChunkLoadingMessage> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.VAR_INT,
+            MaidChunkLoadingMessage::maidId,
+            ByteBufCodecs.BOOL,
+            MaidChunkLoadingMessage::usable,
+            MaidChunkLoadingMessage::new
+    );
 
-    public static void encode(MaidChunkLoadingMessage message, FriendlyByteBuf buffer){
-        buffer.writeInt(message.maidId);
-        buffer.writeBoolean(message.usable);
-    }
-    public static MaidChunkLoadingMessage decode(FriendlyByteBuf buffer){
-        return new MaidChunkLoadingMessage(buffer.readInt(),buffer.readBoolean());
-    }
 
-    public static void handler(MaidChunkLoadingMessage message, Supplier<NetworkEvent.Context> contextSupplier){
-        NetworkEvent.Context context= contextSupplier.get();
-        if(context.getDirection().getReceptionSide().isServer()){
+    public static void handler(MaidChunkLoadingMessage message, IPayloadContext context){
             context.enqueueWork(
                     ()->{
-                        ServerPlayer player=context.getSender();
+                        ServerPlayer player=(ServerPlayer) context.player();
                         if(player==null){
                             return;
                         }
@@ -48,9 +52,11 @@ public class MaidChunkLoadingMessage {
                         }
                     }
             );
-
-
-        }
-        context.setPacketHandled(true);
     }
+
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return null;
+    }
+
 }

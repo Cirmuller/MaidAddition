@@ -1,241 +1,259 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public' }
-        maven { url = 'https://maven.parchmentmc.org' }
-    }
-    dependencies {
-        classpath "org.spongepowered:mixingradle:${mixingradle_version}"
-        classpath 'org.parchmentmc:librarian:1.+'
-    }
-}
+// 调用的 gradle 插件
 plugins {
+    id 'java-library'
+
+    // 用于 eclipse 或者 idea 的插件
     id 'eclipse'
     id 'idea'
-    id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
-    //id("com.github.johnrengelman.shadow") version "8.1.1"
-//   id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+
+    // NeoForged 开发插件
+    id 'net.neoforged.moddev' version '2.0.78'
 }
-apply plugin: 'org.spongepowered.mixin'
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
-apply plugin: 'java'
+
+// ALL 为下载 gradle 源码，方便查看调试
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+// 模组相关信息
 version = mod_version
 group = mod_group_id
 
-base {
-    archivesName = mod_id
-}
-//reobf {
-//    jarJar{ }
-//}
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
-//tasks.jarJar.finalizedBy('reobfJarJar')
-println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
-minecraft {
-    mappings channel: 'parchment', version: "2023.09.03-${minecraft_version}"
-    copyIdeResources = true
-    runs {
-
-        configureEach {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        client {
-            workingDirectory project.file('run')
-            arg "-mixin.config=${mod_id}.mixins.json"
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-            arg "-mixin.config=${mod_id}.mixins.json"
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run')
-            arg "-mixin.config=${mod_id}.mixins.json"
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
-            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', "${mod_id}", '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
-        }
-    }
-}
-
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-mixin {
-    add sourceSets.main, "${mod_id}.refmap.json"
-    config "${mod_id}.mixins.json"
-}
+// 需要的前置库
 repositories {
+    // ./libs 目录为库
     flatDir {
-        dirs 'libs'
+        dir "libs"
     }
+    // mavenLocal 为本机仓库
     mavenLocal()
-    maven { url 'https://jitpack.io' }
+    mavenCentral()
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+    }
+    maven {
+        url "https://maven.shedaniel.me/"
+        content {
+            includeGroup "me.shedaniel"
+            includeGroup "me.shedaniel.cloth"
+            includeGroup "dev.architectury"
+        }
+    }
+    maven {
+        url "https://maven2.bai.lol"
+        content {
+            includeGroup "mcp.mobius.waila"
+            includeGroup "lol.bai"
+        }
+    }
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+        content {
+            includeGroup "dev.emi"
+        }
+    }
+    maven {
+        name 'cursemaven'
+        url "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven { // for TOP
+        url "https://maven.k-4u.nl/"
+        content {
+            includeGroup "mcjty.theoneprobe"
+        }
+    }
+    maven {
+        url = "https://maven.theillusivec4.top/"
+        content {
+            includeGroup "top.theillusivec4.curios"
+        }
+    }
     maven { // Registrate
         url "https://maven.tterrag.com/"
     }
+    maven { url = "https://maven.createmod.net" }
+    maven { url 'https://jitpack.io' }
     maven {
         // Location of the maven for vazkii's mods
         name 'blamejared'
         url 'https://maven.blamejared.com'
     }
-    maven {
-        url 'https://www.cursemaven.com'
-        content {
-            includeGroup "curse.maven"
-        }
-    }
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
-    maven {
-        url = "https://maven.theillusivec4.top/"
-    }
-    maven { url = "https://maven.createmod.net" }
     maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // ForgeConfigAPIPort
     maven { url = "https://maven.parchmentmc.org" }
-    maven {
-        // location of the maven that hosts JEI files before January 2023
-        name = "Progwml6's maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-        // location of a maven mirror for JEI files, as a fallback
-        name = "ModMaven"
-        url = "https://modmaven.dev"
-    }
-
-
-    maven{
-        url="https://mvnrepository.com/artifact/org.jgrapht/jgrapht-core"
-    }
-
 }
-jarJar.enable()
+
+// 打包成 jar 时的名称
+base {
+    archivesName = mod_id + minecraft_version
+}
+
+// 需要 Java 21 版本
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    // NeoForge 版本信息
+    version = project.neo_version
+
+    // 反混淆表
+    parchment {
+        mappingsVersion = project.parchment_mappings_version
+        minecraftVersion = project.parchment_minecraft_version
+    }
+
+    // 运行部分
+    runs {
+        client {
+            client()
+            gameDirectory = project.file('run/client')
+            programArguments = [
+                    "--username", "tartaric_acid"
+            ]
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        server {
+            server()
+            gameDirectory = project.file('run/server')
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        gameTestServer {
+            type = "gameTestServer"
+            gameDirectory = project.file('run/gameTestServer')
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        data {
+            data()
+            gameDirectory = project.file('run/data')
+            programArguments.addAll '--mod', project.mod_id, '--all',
+                    '--output', file('src/generated/resources/').getAbsolutePath(),
+                    '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+
+        configureEach {
+            // +AllowEnhancedClassRedefinition 为 JetBrains Runtime 所需的参数
+            // JetBrains Runtime 是一个修改过的 JDK，支持热重载
+            // +IgnoreUnrecognizedVMOptions 用于忽略未知指令
+            // 否则没有安装 JetBrains Runtime 的用户运行时会报错
+            jvmArguments = ['-XX:+IgnoreUnrecognizedVMOptions',
+                            '-XX:+AllowEnhancedClassRedefinition']
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            // 参考：https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+    }
+
+    mods {
+        // define mod <-> source bindings
+        // these are used to tell the game which sources are for which mod
+        // mostly optional in a single mod project
+        // but multi mod projects should define one per mod
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+sourceSets.main {
+    resources {
+        srcDir 'src/generated/resources'
+    }
+}
+
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+
+    // 自定义一个 minecraftLibrary，方便引入需要 jarJar 的库
+    mcLib
+    implementation {
+        extendsFrom mcLib
+    }
+    additionalRuntimeClasspath {
+        extendsFrom mcLib
+    }
+}
+
+jarJar.setEnabled(true)
+
 dependencies {
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    implementation "net.neoforged:neoforge:${neo_version}"
 
-    compileOnly(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-common:${mixin_extras_version}"))
-    annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
-    implementation fg.deobf("curse.maven:touhou-little-maid-355044:6657436") //1.20.1
-    //implementation fg.deobf("curse.maven:touhou-little-maid-355044:6440959")// 1.21.1
 
-    runtimeOnly fg.deobf("curse.maven:patchouli-306770:4633797")//1.20.1
-    //runtimeOnly fg.deobf("curse.maven:patchouli-306770:5683901")// 1.21.1
 
-    //implementation fg.deobf("curse.maven:create-328085:5838779") //1.20.1
-    implementation fg.deobf("curse.maven:create-328085:6323270")
+    implementation "curse.maven:touhou-little-maid-355044:7307724"// 1.21.1
 
-    //implementation fg.deobf("curse.maven:create-328085:6302730")// 1.21.1
-    implementation fg.deobf("curse.maven:clothconfigapi-348521:5729105")//1.20.1
-    //implementation fg.deobf("curse.maven:clothconfigapi-348521:5729127")
-    //implementation("com.tterrag.registrate:Registrate:MC1.20-1.3.3")
-    //modImplementation(jarJar("com.tterrag.registrate:Registrate:MC1.20-1.3.3"))
-    compileOnly(fg.deobf("com.tterrag.registrate:Registrate:MC1.20-1.3.3"))
-    //jarJar(group: 'com.tterrag.registrate', name: 'Registrate', version: "[MC1.19.3,MC1.20)")
-    compileOnly(fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:1.0.51"))
-    compileOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-api-${minecraft_version}:1.0.1"))
-    compileOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:1.0.1"))
-    implementation fg.deobf("curse.maven:cc-tweaked-282001:4740605")
-    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
-    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
-    // at runtime, use the full JEI jar for Forge
-    runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
-    implementation(fg.deobf("curse.maven:maid-storage-manager-1210244:6649322"))
-    implementation(fg.deobf("curse.maven:just-enough-character-250702:6680042"))
-    jarJar(minecraftLibrary(group: 'org.jgrapht', name: 'jgrapht-core', version: '1.5.2')){
-        jarJar.ranged(it,"[1.5.2,)")
-    }
-    jarJar(minecraftLibrary(group: 'org.apfloat', name: 'apfloat', version: '1.10.1')){
-        jarJar.ranged(it,"[1.10.1,)")
-    }
-    jarJar(minecraftLibrary(group: 'org.jheaps', name: 'jheaps', version: '0.14')){
-        jarJar.ranged(it,"[0.14,)")
-    }
+
+    runtimeOnly "curse.maven:patchouli-306770:5683901"// 1.21.1
+
+
+    implementation "curse.maven:create-328085:6323264"// 1.21.1
+    implementation "curse.maven:clothconfigapi-348521:5729127"
+    compileOnly "com.tterrag.registrate:Registrate:MC1.20-1.3.11"
+    compileOnly("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:1.0.49")
+    compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:1.0.4-27")
+    compileOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:1.0.4-27")
+    //implementation "curse.maven:cc-tweaked-282001:4740605"
+    mcLib jarJar(group: 'org.jgrapht', name: 'jgrapht-core', version: '1.5.2')
+    mcLib jarJar(group: 'org.apfloat', name: 'apfloat', version: '1.10.1')
+    mcLib jarJar(group: 'org.jheaps', name: 'jheaps', version: '0.14')
+
 }
 
-tasks.named('processResources', ProcessResources).configure {
+tasks.compileJava {
+    // dsx137: 强制重新编译和生成 refmap.json 文件，避免偶发情况下该文件丢失问题
+    outputs.upToDateWhen { false }
+}
+
+// 用于 neoforge.mods 里替换那一堆 ${xxxx}
+tasks.withType(ProcessResources).configureEach {
     var replaceProperties = [
-            minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
-            forge_version: forge_version, forge_version_range: forge_version_range,
-            loader_version_range: loader_version_range,
-            mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
-            mod_authors: mod_authors, mod_description: mod_description,
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description
     ]
     inputs.properties replaceProperties
 
-    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
-        expand replaceProperties + [project: project]
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
     }
 }
 
-tasks.named('jar', Jar).configure {
+// 生成 manifest 内容，用于填充版本信息等内容
+jar {
     manifest {
         attributes([
-                'Specification-Title'     : mod_id,
-                'Specification-Vendor'    : mod_authors,
-                'Specification-Version'   : '1', // We are version 1 of ourselves
-                'Implementation-Title'    : project.name,
-                'Implementation-Version'  : project.jar.archiveVersion,
-                'Implementation-Vendor'   : mod_authors,
-                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Implementation-Title"  : project.name,
+                "Implementation-Version": "${version}"
         ])
     }
-
-    finalizedBy 'reobfJar'
 }
 
-
-publishing {
-    publications {
-        register('mavenJava', MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/mcmodsrepo"
-        }
-    }
-}
-
+// 必须，编码需要显式指定为 UTF
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+// 让 idea 主动下载前置库的源码和 Javadoc
+// 新版本 idea 默认不会下载这两个，这虽然加快了构建速度，但是不方便调试
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
 }

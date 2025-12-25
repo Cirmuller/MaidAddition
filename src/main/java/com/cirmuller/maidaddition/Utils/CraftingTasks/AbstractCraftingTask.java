@@ -71,7 +71,10 @@ public class AbstractCraftingTask {
         this.preRecipe=parentCraftingRecipe;
         this.resultIngredient=ingredientToCraft;
         if(!initialized){
-            recipes=this.level.getRecipeManager().getAllRecipesFor(RecipeType.CRAFTING);
+
+            var recipes_holder=this.level.getRecipeManager().getAllRecipesFor(RecipeType.CRAFTING);
+            recipes=new ArrayList<>(recipes_holder.size());
+            recipes_holder.forEach((rec)->{recipes.add(rec.value());});
             initialized=true;
         }
         this.count=(count==null)?(this.initAndGetCount()):count;

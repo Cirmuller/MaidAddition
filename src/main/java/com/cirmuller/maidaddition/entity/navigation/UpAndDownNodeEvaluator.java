@@ -9,9 +9,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.PathNavigationRegion;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.PathFinder;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 
 public class UpAndDownNodeEvaluator extends MaidNodeEvaluator {
@@ -41,7 +41,7 @@ public class UpAndDownNodeEvaluator extends MaidNodeEvaluator {
             Node node=this.getNode(new BlockPos.MutableBlockPos(origin.x,origin.y+1,origin.z));
             if (!node.closed) {
                 node.costMalus = 16;
-                node.type = BlockPathTypes.WALKABLE;
+                node.type = PathType.WALKABLE;
                 if (nodeId + 1 < nodes.length) {
                     nodes[nodeId++] = node;
                 }
@@ -53,7 +53,7 @@ public class UpAndDownNodeEvaluator extends MaidNodeEvaluator {
             Node node=this.getNode(new BlockPos.MutableBlockPos(origin.x,origin.y+1,origin.z));
             if (!node.closed) {
                 node.costMalus = 16;
-                node.type = BlockPathTypes.WALKABLE;
+                node.type = PathType.WALKABLE;
                 if (nodeId + 1 < nodes.length) {
                     nodes[nodeId++] = node;
                 }

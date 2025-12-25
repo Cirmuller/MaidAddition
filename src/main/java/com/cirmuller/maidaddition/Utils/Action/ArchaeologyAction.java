@@ -17,8 +17,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BrushableBlock;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.entity.BrushableBlockEntity;
-import net.minecraftforge.items.wrapper.EntityHandsInvWrapper;
-import net.minecraftforge.items.wrapper.RangedWrapper;
+import net.neoforged.neoforge.items.wrapper.EntityHandsInvWrapper;
+import net.neoforged.neoforge.items.wrapper.RangedWrapper;
 
 public class ArchaeologyAction extends LongTermAction<EntityMaid> {
     public ArchaeologyAction(){
@@ -63,10 +63,10 @@ public class ArchaeologyAction extends LongTermAction<EntityMaid> {
         entity.swing(InteractionHand.MAIN_HAND);
         if(success(entity)){
            ItemStack stack= handInv.extractItem(0,1,false);
-           stack.hurtAndBreak(1,entity,(maid)->{
-               maid.getOwner().sendSystemMessage(Component.translatable("message."+ MaidAddition.MODID+".brush_is_broken"));
-               maid.getChatBubbleManager().addChatBubble(TextChatBubbleData.type1(Component.translatable("message."+MaidAddition.MODID+".brush_is_broken")));
-               maid.broadcastBreakEvent(InteractionHand.MAIN_HAND);
+           stack.hurtAndBreak(1, (ServerLevel) entity.level(),entity,(maid)->{
+               entity.getOwner().sendSystemMessage(Component.translatable("message."+ MaidAddition.MODID+".brush_is_broken"));
+               entity.getChatBubbleManager().addChatBubble(TextChatBubbleData.type1(Component.translatable("message."+MaidAddition.MODID+".brush_is_broken")));
+               //entity.broadcastBreakEvent(InteractionHand.MAIN_HAND);
            });
            handInv.insertItem(0,stack,false);
         }

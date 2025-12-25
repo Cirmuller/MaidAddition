@@ -7,7 +7,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.items.wrapper.RangedWrapper;
+import net.neoforged.neoforge.items.wrapper.RangedWrapper;
 
 public class MaidAction {
     public static MaidPutBlockUnderFeet putBlockUnderFeet =(maid, predicate) -> {

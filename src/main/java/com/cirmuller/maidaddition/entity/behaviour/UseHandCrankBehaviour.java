@@ -57,6 +57,7 @@ public class UseHandCrankBehaviour extends Behavior<EntityMaid> {
         entityMaid.getBrain().getMemory(MemoryRegistry.HAND_CRANK_TARGET.get()).ifPresent((target)->{
             BehaviorUtils.setWalkAndLookTargetMemories(entityMaid,target.getBlockPos(),this.speedModifier,0);
             handCrankBlockEntity=target;
+            BlockPos pos=target.getBlockPos();
             Direction direction=handCrankBlockEntity.getBlockState().getValue(DirectionalKineticBlock.FACING);
             entityMaid.getBrain().setMemory(MemoryModuleType.LOOK_TARGET,new BlockPosTracker(handCrankBlockEntity.getBlockPos()));
             BlockPosTracker blockPosTracker=switch (direction){
@@ -156,6 +157,6 @@ public class UseHandCrankBehaviour extends Behavior<EntityMaid> {
     @Override
     protected void stop(ServerLevel pLevel, EntityMaid pEntity, long pGameTime) {
         super.stop(pLevel, pEntity, pGameTime);
-        pEntity.getBrain().eraseMemory(MemoryModuleType.WALK_TARGET);
+        //pEntity.getBrain().eraseMemory(MemoryModuleType.WALK_TARGET);
     }
 }

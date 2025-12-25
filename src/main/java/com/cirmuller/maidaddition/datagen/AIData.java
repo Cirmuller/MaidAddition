@@ -12,15 +12,10 @@ import net.minecraft.data.DataProvider;
 import com.cirmuller.maidaddition.datagen.TaskKey;
 import net.minecraft.data.PackOutput;
 import net.minecraft.server.packs.PathPackResources;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.common.data.LanguageProvider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import javax.json.JsonBuilderFactory;
-import javax.json.JsonObject;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;

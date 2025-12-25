@@ -2,7 +2,6 @@ package com.cirmuller.maidaddition.entity.task;
 
 import com.cirmuller.maidaddition.MaidAddition;
 import com.cirmuller.maidaddition.entity.behaviour.BrushSandBehaviour;
-import com.cirmuller.maidaddition.entity.behaviour.CraftingAndCarryingBehaviour;
 import com.cirmuller.maidaddition.entity.behaviour.FindingPathBehaviour;
 import com.cirmuller.maidaddition.entity.behaviour.WalkingToSuspiciousSandBehaviour;
 import com.cirmuller.maidaddition.entity.memory.MemoryRegistry;
@@ -25,7 +24,7 @@ public class ArchaeologizingTask implements IMaidTask {
 
     @Override
     public ResourceLocation getUid() {
-        return new ResourceLocation(MaidAddition.MODID,"archaeology");
+        return ResourceLocation.tryBuild(MaidAddition.MODID,"archaeology");
     }
 
     @Override

@@ -5,9 +5,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -148,14 +147,11 @@ public class ItemList extends LinkedList<ItemStack> {
             if(chest==null){
                 continue;
             }
-            LazyOptional<IItemHandler> capability=chest.getCapability(ForgeCapabilities.ITEM_HANDLER);
-            capability.ifPresent((cap)->{
-                int sz=cap.getSlots();
-                for(int i=0;i<sz;i++){
-                    result.add(cap.getStackInSlot(i));
-                }
-            });
-
+            IItemHandler capability=level.getCapability(Capabilities.ItemHandler.BLOCK,pos,null);
+            int sz= capability.getSlots();
+            for(int i=0;i<sz;i++){
+                result.add(capability.getStackInSlot(i));
+            }
         }
         return result;
     }

@@ -5,7 +5,6 @@ import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.Tags;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import static com.cirmuller.maidaddition.Utils.Action.MaidAction.*;
 import java.util.EmptyStackException;

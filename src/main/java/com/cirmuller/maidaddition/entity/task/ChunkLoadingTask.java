@@ -20,7 +20,7 @@ public class ChunkLoadingTask implements IMaidTask {
 
     @Override
     public ResourceLocation getUid() {
-        return new ResourceLocation(MaidAddition.MODID,"chunk_loading_task");
+        return ResourceLocation.tryBuild(MaidAddition.MODID,"chunk_loading_task");
     }
 
     @Override

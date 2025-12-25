@@ -119,10 +119,10 @@ public class CalculateTaskThread extends Thread{
         }).toList().get(0);
         if(taskKeysWithScore.get(highestScore)>0.2){
             IMaidTask result;
-            if((result=TaskManager.findTask(new ResourceLocation(TouhouLittleMaid.MOD_ID,highestScore.getTask())).orElse(null))!=null){
+            if((result=TaskManager.findTask(ResourceLocation.tryBuild(TouhouLittleMaid.MOD_ID,highestScore.getTask())).orElse(null))!=null){
                 return result;
             }
-            else if((result=TaskManager.findTask(new ResourceLocation(MaidAddition.MODID,highestScore.getTask())).orElse(null))!=null){
+            else if((result=TaskManager.findTask(ResourceLocation.tryBuild(MaidAddition.MODID,highestScore.getTask())).orElse(null))!=null){
                 return result;
             }else{
                 return null;
