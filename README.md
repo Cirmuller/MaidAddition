@@ -1,25 +1,38 @@
+# MaidAddition
+### 摘要
+本模组为车万女仆附属模组。在本模组中，我们增加了一下3个功能：
 
-Installation information
-=======
+1. 女仆能加载周围的区块，在加载的区块中，实体、随机刻等会被运算。
+2. 女仆能使用机械动力的手摇曲柄
+3. 增加了考古功能。
+### 致谢
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+1. 车万女仆模组：酒石酸菌等
+2. 机械动力模组：Simibuli等
+### 用法
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+1. 添加本模组后，女仆任务栏会多出手摇曲柄任务，如下图所示：
+2. 添加本模组后，女仆头像框会出现屏障按钮，点击即可设定是否加载区块，如图所示：
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+![Image](https://github.com/user-attachments/assets/82ecaa85-9823-4549-b438-a9510d21b1db)
 
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
+![Image](https://github.com/user-attachments/assets/d787cb46-3b92-45cf-9855-eb59e3275183)
+### 注意事项
+由于本人模组制作经验欠缺，此模组或仍有大量bug，还请小心使用。
 
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+### Introduction
+This is an addon for Touhou Little Maid. We add 3 features for the maids:
+
+1. Maids can load the chunks nearby. On the chunks loaded by maids, entities, random ticks etc. would be computed.
+2. Maids can use the handcranks in Create.
+3. Maids can do archaeology work.
+### Credits
+
+1. Touhou Little Maid: TartaricAcid et al.
+2. Create: Simibuli et al.
+### Usage
+
+1. After this mod is added to game, the table of tasks will contain a task of using handcranks, as the above picture showed.
+2. After this mod is added to game, the avatar frame will contain a button with image of barriar. One can set whether to load the chunks nearby by clicking the button, as picture showed.
+### Notices
+As a lack of experience for making mods, this mod may contain a large number of bugs. Please be careful when using this mod.
