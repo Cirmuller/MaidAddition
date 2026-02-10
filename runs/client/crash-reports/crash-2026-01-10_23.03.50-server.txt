@@ -1,0 +1,194 @@
+---- Minecraft Crash Report ----
+// My bad.
+
+Time: 2026-01-10 23:03:50
+Description: Ticking entity
+
+java.lang.NoClassDefFoundError: org/jgrapht/Graph
+	at TRANSFORMER/maidaddition@1.0.0-beta/com.cirmuller.maidaddition.entity.behaviour.FindingPathBehaviour.start(FindingPathBehaviour.java:46) ~[%23197!/:?] {re:classloading}
+	at TRANSFORMER/maidaddition@1.0.0-beta/com.cirmuller.maidaddition.entity.behaviour.FindingPathBehaviour.start(FindingPathBehaviour.java:22) ~[%23197!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.ai.behavior.Behavior.tryStart(Behavior.java:43) ~[neoforge-21.1.217.jar%23195!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.ai.Brain.startEachNonRunningBehavior(Brain.java:445) ~[neoforge-21.1.217.jar%23195!/:?] {re:classloading,pl:accesstransformer:B}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.ai.Brain.tick(Brain.java:405) ~[neoforge-21.1.217.jar%23195!/:?] {re:classloading,pl:accesstransformer:B}
+	at TRANSFORMER/touhou_little_maid@1.4.6-neoforge+mc1.21.1/com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid.customServerAiStep(EntityMaid.java:495) ~[touhou-little-maid-355044-7307724.jar%23199!/:1.4.6-neoforge+mc1.21.1] {re:mixin,re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.Mob.serverAiStep(Mob.java:800) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:MobMixin from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.LivingEntity.aiStep(LivingEntity.java:2767) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:touhou_little_maid.mixins.json:accessor.LivingEntityAccessor from mod touhou_little_maid,pl:mixin:APP:create.mixins.json:CustomItemUseEffectsMixin from mod create,pl:mixin:APP:create.mixins.json:LavaSwimmingMixin from mod create,pl:mixin:APP:create.mixins.json:accessor.LivingEntityAccessor from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.Mob.aiStep(Mob.java:571) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:MobMixin from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.AgeableMob.aiStep(AgeableMob.java:127) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.animal.Animal.aiStep(Animal.java:55) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,re:classloading}
+	at TRANSFORMER/touhou_little_maid@1.4.6-neoforge+mc1.21.1/com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid.aiStep(EntityMaid.java:599) ~[touhou-little-maid-355044-7307724.jar%23199!/:1.4.6-neoforge+mc1.21.1] {re:mixin,re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.LivingEntity.tick(LivingEntity.java:2493) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:touhou_little_maid.mixins.json:accessor.LivingEntityAccessor from mod touhou_little_maid,pl:mixin:APP:create.mixins.json:CustomItemUseEffectsMixin from mod create,pl:mixin:APP:create.mixins.json:LavaSwimmingMixin from mod create,pl:mixin:APP:create.mixins.json:accessor.LivingEntityAccessor from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.Mob.tick(Mob.java:357) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:MobMixin from mod create,pl:mixin:A}
+	at TRANSFORMER/touhou_little_maid@1.4.6-neoforge+mc1.21.1/com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid.tick(EntityMaid.java:514) ~[touhou-little-maid-355044-7307724.jar%23199!/:1.4.6-neoforge+mc1.21.1] {re:mixin,re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerLevel.tickNonPassenger(ServerLevel.java:777) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:accessor.ServerLevelAccessor from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.Level.guardEntityTick(Level.java:610) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:flywheel.impl.mixins.json:LevelMixin from mod flywheel,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerLevel.lambda$tick$2(ServerLevel.java:423) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:accessor.ServerLevelAccessor from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.entity.EntityTickList.forEach(EntityTickList.java:53) ~[neoforge-21.1.217.jar%23195!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerLevel.tick(ServerLevel.java:403) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:accessor.ServerLevelAccessor from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1052) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:ponder.mixins.json:accessor.MinecraftServerAccessor from mod ponder,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:932) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:ponder.mixins.json:accessor.MinecraftServerAccessor from mod ponder,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.server.IntegratedServer.tickServer(IntegratedServer.java:113) ~[neoforge-21.1.217.jar%23195!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:713) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:ponder.mixins.json:accessor.MinecraftServerAccessor from mod ponder,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:267) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:ponder.mixins.json:accessor.MinecraftServerAccessor from mod ponder,pl:mixin:A}
+	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?] {}
+Caused by: java.lang.ClassNotFoundException: org.jgrapht.Graph
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[?:?] {}
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526) ~[?:?] {}
+	at cpw.mods.securejarhandler/cpw.mods.cl.ModuleClassLoader.loadClass(ModuleClassLoader.java:216) ~[securejarhandler-3.0.8.jar:?] {}
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526) ~[?:?] {}
+	at cpw.mods.securejarhandler/cpw.mods.cl.ModuleClassLoader.loadClass(ModuleClassLoader.java:216) ~[securejarhandler-3.0.8.jar:?] {}
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526) ~[?:?] {}
+	... 26 more
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at TRANSFORMER/maidaddition@1.0.0-beta/com.cirmuller.maidaddition.entity.behaviour.FindingPathBehaviour.start(FindingPathBehaviour.java:46) ~[%23197!/:?] {re:classloading}
+	at TRANSFORMER/maidaddition@1.0.0-beta/com.cirmuller.maidaddition.entity.behaviour.FindingPathBehaviour.start(FindingPathBehaviour.java:22) ~[%23197!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.ai.behavior.Behavior.tryStart(Behavior.java:43) ~[neoforge-21.1.217.jar%23195!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.ai.Brain.startEachNonRunningBehavior(Brain.java:445) ~[neoforge-21.1.217.jar%23195!/:?] {re:classloading,pl:accesstransformer:B}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.ai.Brain.tick(Brain.java:405) ~[neoforge-21.1.217.jar%23195!/:?] {re:classloading,pl:accesstransformer:B}
+	at TRANSFORMER/touhou_little_maid@1.4.6-neoforge+mc1.21.1/com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid.customServerAiStep(EntityMaid.java:495) ~[touhou-little-maid-355044-7307724.jar%23199!/:1.4.6-neoforge+mc1.21.1] {re:mixin,re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.Mob.serverAiStep(Mob.java:800) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:MobMixin from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.LivingEntity.aiStep(LivingEntity.java:2767) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:touhou_little_maid.mixins.json:accessor.LivingEntityAccessor from mod touhou_little_maid,pl:mixin:APP:create.mixins.json:CustomItemUseEffectsMixin from mod create,pl:mixin:APP:create.mixins.json:LavaSwimmingMixin from mod create,pl:mixin:APP:create.mixins.json:accessor.LivingEntityAccessor from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.Mob.aiStep(Mob.java:571) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:MobMixin from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.AgeableMob.aiStep(AgeableMob.java:127) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.animal.Animal.aiStep(Animal.java:55) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,re:classloading}
+	at TRANSFORMER/touhou_little_maid@1.4.6-neoforge+mc1.21.1/com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid.aiStep(EntityMaid.java:599) ~[touhou-little-maid-355044-7307724.jar%23199!/:1.4.6-neoforge+mc1.21.1] {re:mixin,re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.LivingEntity.tick(LivingEntity.java:2493) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:touhou_little_maid.mixins.json:accessor.LivingEntityAccessor from mod touhou_little_maid,pl:mixin:APP:create.mixins.json:CustomItemUseEffectsMixin from mod create,pl:mixin:APP:create.mixins.json:LavaSwimmingMixin from mod create,pl:mixin:APP:create.mixins.json:accessor.LivingEntityAccessor from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.entity.Mob.tick(Mob.java:357) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:MobMixin from mod create,pl:mixin:A}
+	at TRANSFORMER/touhou_little_maid@1.4.6-neoforge+mc1.21.1/com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid.tick(EntityMaid.java:514) ~[touhou-little-maid-355044-7307724.jar%23199!/:1.4.6-neoforge+mc1.21.1] {re:mixin,re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerLevel.tickNonPassenger(ServerLevel.java:777) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:accessor.ServerLevelAccessor from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.Level.guardEntityTick(Level.java:610) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:flywheel.impl.mixins.json:LevelMixin from mod flywheel,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerLevel.lambda$tick$2(ServerLevel.java:423) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:accessor.ServerLevelAccessor from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.entity.EntityTickList.forEach(EntityTickList.java:53) ~[neoforge-21.1.217.jar%23195!/:?] {re:classloading}
+-- Entity being ticked --
+Details:
+	Entity Type: touhou_little_maid:maid (com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid)
+	Entity ID: 6
+	Entity Name: 玉造魅须丸
+	Entity's Exact location: 343.80, 69.00, 101.84
+	Entity's Block location: World: (343,69,101), Section: (at 7,5,5 in 21,4,6; chunk contains blocks 336,-64,96 to 351,319,111), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,-64,0 to 511,319,511)
+	Entity's Momentum: 0.00, -0.08, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: null
+Stacktrace:
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.Level.guardEntityTick(Level.java:610) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:flywheel.impl.mixins.json:LevelMixin from mod flywheel,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerLevel.lambda$tick$2(ServerLevel.java:423) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:accessor.ServerLevelAccessor from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.entity.EntityTickList.forEach(EntityTickList.java:53) ~[neoforge-21.1.217.jar%23195!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerLevel.tick(ServerLevel.java:403) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:accessor.ServerLevelAccessor from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1052) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:ponder.mixins.json:accessor.MinecraftServerAccessor from mod ponder,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:932) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:ponder.mixins.json:accessor.MinecraftServerAccessor from mod ponder,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.server.IntegratedServer.tickServer(IntegratedServer.java:113) ~[neoforge-21.1.217.jar%23195!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:713) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:ponder.mixins.json:accessor.MinecraftServerAccessor from mod ponder,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:267) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:ponder.mixins.json:accessor.MinecraftServerAccessor from mod ponder,pl:mixin:A}
+	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?] {}
+
+
+-- Affected level --
+Details:
+	All players: 0 total; []
+	Chunk stats: 841
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (336,63,114), Section: (at 0,15,2 in 21,3,7; chunk contains blocks 336,-64,112 to 351,319,127), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,-64,0 to 511,319,511)
+	Level time: 2400 game time, 2400 day time
+	Level name: 新的世界
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Commands: true
+	Level weather: Rain time: 153699 (now: false), thunder time: 53346 (now: false)
+	Known server brands: neoforge
+	Removed feature flags: 
+	Level was modded: true
+	Level storage version: 0x04ABD - Anvil
+	Loaded entity count: 37
+Stacktrace:
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerLevel.fillReportDetails(ServerLevel.java:1745) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:accessor.ServerLevelAccessor from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1055) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:ponder.mixins.json:accessor.MinecraftServerAccessor from mod ponder,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:932) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:ponder.mixins.json:accessor.MinecraftServerAccessor from mod ponder,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.server.IntegratedServer.tickServer(IntegratedServer.java:113) ~[neoforge-21.1.217.jar%23195!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:713) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:ponder.mixins.json:accessor.MinecraftServerAccessor from mod ponder,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:267) ~[neoforge-21.1.217.jar%23195!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:ponder.mixins.json:accessor.MinecraftServerAccessor from mod ponder,pl:mixin:A}
+	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?] {}
+
+
+-- System Details --
+Details:
+	Minecraft Version: 1.21.1
+	Minecraft Version ID: 1.21.1
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 21.0.6, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 426000992 bytes (406 MiB) / 1237319680 bytes (1180 MiB) up to 8531214336 bytes (8136 MiB)
+	CPUs: 28
+	Processor Vendor: GenuineIntel
+	Processor Name: Intel(R) Core(TM) i7-14700KF
+	Identifier: Intel64 Family 6 Model 183 Stepping 1
+	Microarchitecture: Raptor Lake
+	Frequency (GHz): 3.42
+	Number of physical packages: 1
+	Number of physical CPUs: 20
+	Number of logical CPUs: 28
+	Graphics card #0 name: NVIDIA GeForce RTX 4070
+	Graphics card #0 vendor: NVIDIA
+	Graphics card #0 VRAM (MiB): 12282.00
+	Graphics card #0 deviceId: VideoController1
+	Graphics card #0 versionInfo: 32.0.15.7196
+	Graphics card #1 name: NVIDIA GeForce GTX 1060 6GB
+	Graphics card #1 vendor: NVIDIA
+	Graphics card #1 VRAM (MiB): 6144.00
+	Graphics card #1 deviceId: VideoController2
+	Graphics card #1 versionInfo: 32.0.15.7196
+	Memory slot #0 capacity (MiB): 32768.00
+	Memory slot #0 clockSpeed (GHz): 5.60
+	Memory slot #0 type: Unknown
+	Virtual memory max (MiB): 37398.91
+	Virtual memory used (MiB): 17336.20
+	Swap memory total (MiB): 4864.00
+	Swap memory used (MiB): 92.84
+	Space in storage for jna.tmpdir (MiB): <path not set>
+	Space in storage for org.lwjgl.system.SharedLibraryExtractPath (MiB): <path not set>
+	Space in storage for io.netty.native.workdir (MiB): <path not set>
+	Space in storage for java.io.tmpdir (MiB): available: 337075.59, total: 599414.06
+	Space in storage for workdir (MiB): available: 118973.91, total: 1307612.00
+	JVM Flags: 1 total; -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump
+	Server Running: true
+	Player Count: 0 / 8; []
+	Active Data Packs: create:dynamic_data, vanilla, mod_data, mod/cloth_config (incompatible), mod/touhou_little_maid (incompatible), mod/flywheel (incompatible), mod/patchouli (incompatible), mod/ponder (incompatible), mod/maidaddition (incompatible), mod/create (incompatible), mod/neoforge
+	Available Data Packs: bundle, trade_rebalance, vanilla, mod/cloth_config (incompatible), mod/create (incompatible), mod/flywheel (incompatible), mod/maidaddition (incompatible), mod/neoforge, mod/patchouli (incompatible), mod/ponder (incompatible), mod/touhou_little_maid (incompatible), mod_data, create:dynamic_data
+	Enabled Feature Flags: minecraft:vanilla
+	World Generation: Stable
+	World Seed: 4786886593693350038
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'neoforge'; Server brand changed to 'neoforge'
+	Launched Version: 21.1.217
+	ModLauncher: 11.0.5+main.901c6ea8
+	ModLauncher launch target: forgeclientdev
+	ModLauncher services: 
+		sponge-mixin-0.15.2+mixin.0.8.7.jar mixin PLUGINSERVICE 
+		loader-4.0.42.jar slf4jfixer PLUGINSERVICE 
+		loader-4.0.42.jar runtime_enum_extender PLUGINSERVICE 
+		at-modlauncher-10.0.1.jar accesstransformer PLUGINSERVICE 
+		loader-4.0.42.jar runtimedistcleaner PLUGINSERVICE 
+		modlauncher-11.0.5.jar mixin TRANSFORMATIONSERVICE 
+		modlauncher-11.0.5.jar fml TRANSFORMATIONSERVICE 
+	FML Language Providers: 
+		javafml@4.0
+		lowcodefml@4.0
+		minecraft@4.0
+	Mod List: 
+		clothconfigapi-348521-5729127.jar                 |Cloth Config v15 API          |cloth_config                  |15.0.140            |Manifest: NOSIGNATURE
+		create-328085-6323264.jar                         |Create                        |create                        |6.0.4               |Manifest: NOSIGNATURE
+		flywheel-neoforge-1.21.1-1.0.2.jar                |Flywheel                      |flywheel                      |1.0.2               |Manifest: NOSIGNATURE
+		main                                              |Maid Addition                 |maidaddition                  |1.0.0-beta          |Manifest: NOSIGNATURE
+		neoforge-21.1.217.jar                             |Minecraft                     |minecraft                     |1.21.1              |Manifest: NOSIGNATURE
+		neoforge-21.1.217.jar                             |NeoForge                      |neoforge                      |21.1.217            |Manifest: NOSIGNATURE
+		patchouli-306770-5683901.jar                      |Patchouli                     |patchouli                     |1.21-87-NEOFORGE    |Manifest: NOSIGNATURE
+		Ponder-NeoForge-1.21.1-1.0.46.jar                 |Ponder                        |ponder                        |1.0.46              |Manifest: NOSIGNATURE
+		touhou-little-maid-355044-7307724.jar             |Touhou Little Maid            |touhou_little_maid            |1.4.6-neoforge+mc1.2|Manifest: NOSIGNATURE
+	Crash Report UUID: 729c3460-bc57-4e38-9ab4-cf283ed0c52f
+	FML: 4.0.42
+	NeoForge: 21.1.217
+	Flywheel Backend: flywheel:indirect

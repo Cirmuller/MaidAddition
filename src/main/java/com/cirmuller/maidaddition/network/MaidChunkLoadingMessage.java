@@ -27,7 +27,7 @@ import static com.github.tartaricacid.touhoulittlemaid.util.ResourceLocationUtil
 
 
 public record MaidChunkLoadingMessage(int maidId, boolean usable) implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<MaidChunkLoadingMessage> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.tryBuild(MaidAddition.MODID,"maid_chunk_loading_message"));
+    public static final CustomPacketPayload.Type<MaidChunkLoadingMessage> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(MaidAddition.MODID,"maid_chunk_loading_message"));
     public static final StreamCodec<ByteBuf, MaidChunkLoadingMessage> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.VAR_INT,
             MaidChunkLoadingMessage::maidId,
@@ -56,7 +56,7 @@ public record MaidChunkLoadingMessage(int maidId, boolean usable) implements Cus
 
     @Override
     public Type<? extends CustomPacketPayload> type() {
-        return null;
+        return TYPE;
     }
 
 }
